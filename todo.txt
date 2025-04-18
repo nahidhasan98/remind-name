@@ -1,0 +1,4 @@
+bot programming to
+- create an endpoint to get token 
+- add feature to update timeframe
+- add captcha to prevent spam

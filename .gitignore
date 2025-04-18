@@ -1,0 +1,12 @@
+# config
+config/config.go
+
+# binary
+main
+main.exe
+remind-name
+remind-name.exe
+
+# resources
+ngrok
+ngrok.exe

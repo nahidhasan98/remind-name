@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+
+    <link rel="stylesheet" href="../assets/styles/bootstrap.min.css?v={{ .VersionString }}" type="text/css">
+    <link rel="stylesheet" href="../assets/styles/nice-select2.css?v={{ .VersionString }}" type="text/css">
+    <link rel="stylesheet" href="../assets/styles/main.css?v={{ .VersionString }}" type="text/css">
+
+    <title>{{ .Title }}</title>
+</head>
+
+<body>
+    <div id="header" class="mb-3">
+        <div class="row">
+            <div class="col-4">
+                <a href="/">
+                    <img src="../assets/images/logo.png?v={{ .VersionString }}" alt="" srcset="">
+                </a>
+            </div>
+            <div class="col text-end" id="headerText">
+                <h2 class="m-0">{{ .Title }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="nav"></div>
+
+    <div id="container" class="p-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <form id="subscriptionForm" class="text-center">
+                        <div class="row mb-3">
+                            <label for="platform" class="form-label mb-0">Choose a Platform</label>
+                            <select name="platform" id="platform" required>
+                                <option data-display="Select">Select an option</option>
+                                <option value="Telegram">Telegram</option>
+                                <option value="Discord" disabled>Discord</option>
+                                <option value="Messenger" disabled>Messenger</option>
+                                <option value="Skype" disabled>Skype</option>
+                                <option value="Whatsapp" disabled>Whatsapp</option>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="username" class="form-label mb-0" id="usernameLabel">Your Username or ID</label>
+                            <input type="text" class="inputField" id="username" name="username" placeholder="" required>
+                            <input type="hidden" name="timezone" id="timezone">
+                        </div>
+                        <div class="row mb-4">
+                            <label class="form-label mb-0">Schedule</label>
+                            <div id="scheduleSection" class="p-0 mb-0 text-start">
+                                <span id="defaultSchedule" class="active">
+                                    <svg id="defaultUncheck" width="18" height="18" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M64 80c-8.8 0-16 7.2-16 16v320c0 8.8 7.2 16 16 16h320c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32h320c35.3 0 64 28.7 64 64v320c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96z" />
+                                    </svg>
+                                    <svg id="defaultCheck" width="18" height="18" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                                    </svg>
+                                    Default
+                                </span>
+                                <span id="customSchedule">
+                                    <svg id="customUncheck" width="18" height="18" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M64 80c-8.8 0-16 7.2-16 16v320c0 8.8 7.2 16 16 16h320c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16H64zM0 96C0 60.7 28.7 32 64 32h320c35.3 0 64 28.7 64 64v320c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96z" />
+                                    </svg>
+                                    <svg id="customCheck" width="18" height="18" fill="currentColor"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM337 209L209 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L303 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
+                                    </svg>
+                                    Custom
+                                </span>
+                                <input type="hidden" id="scheduleType" name="scheduleType" value="default" />
+                            </div>
+                            <div id="defaultSection">
+                                <p class="m-0 py-2">
+                                    From 6:00 AM To 9:00 PM<br>
+                                    with Interval 3:00 hour
+                                </p>
+                            </div>
+                            <div id="customSection" class="p-0">
+                                <div class="my-2">
+                                    <span class="timerLabel">From:</span>
+                                    <span class="timer">
+                                        <span class="timeReal">
+                                            <label for="fromHour">Hours</label>
+                                            <input type="number" class="inputField" id="fromHour" name="fromHour"
+                                                value="6" min="1" max="12">
+                                        </span>
+                                        <span class="timeFake">
+                                            <span>&nbsp;</span>
+                                            <span>:</span>
+                                        </span>
+                                        <span class="timeReal">
+                                            <label for="fromMinute">Minutes</label>
+                                            <input type="number" class="inputField" id="fromMinute" name="fromMinute"
+                                                value="00" min="0" max="59" disabled>
+                                        </span>
+                                        <span id="fromAMPM">
+                                            <span class="am">AM</span>
+                                            <span class="pm">PM</span>
+                                            <input type="hidden" name="fromAMPM" value="am" />
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="timerLabel">To:</span>
+                                    <span class="timer">
+                                        <span class="timeReal">
+                                            <label for="toHour">Hours</label>
+                                            <input type="number" class="inputField" id="toHour" name="toHour" value="9"
+                                                min="1" max="12">
+                                        </span>
+                                        <span class="timeFake">
+                                            <span>&nbsp;</span>
+                                            <span>:</span>
+                                        </span>
+                                        <span class="timeReal">
+                                            <label for="toMinute">Minutes</label>
+                                            <input type="number" class="inputField" id="toMinute" name="toMinute"
+                                                value="00" min="0" max="59" disabled>
+                                        </span>
+                                        <span id="toAMPM">
+                                            <span class="am">AM</span>
+                                            <span class="pm">PM</span>
+                                            <input type="hidden" name="toAMPM" value="pm" />
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="timerLabel">Interval:</span>
+                                    <span class="timer">
+                                        <span class="timeReal">
+                                            <label for="intervalHour">Hours</label>
+                                            <input type="number" class="inputField" id="intervalHour"
+                                                name="intervalHour" value="3" min="3" max="12">
+                                        </span>
+                                        <span class="timeFake">
+                                            <span>&nbsp;</span>
+                                            <span>:</span>
+                                        </span>
+                                        <span class="timeReal">
+                                            <label for="intervalMinute">Minutes</label>
+                                            <input type="number" class="inputField" id="intervalMinute"
+                                                name="intervalMinute" value="00" min="0" max="59" disabled>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row mb-4">
+                            <div>
+                                <div>Languages</div>
+                                <input type="checkbox" id="arabic" name="arabic" value="arabic" checked>
+                                <label for="arabic" class="form-label mb-0">Arabic</label>
+                                <input type="checkbox" id="english" name="english" value="english" checked>
+                                <label for="english" class="form-label mb-0">English</label>
+
+                            </div>
+                            <label for="language" class="form-label mb-0">Choose Additional Language</label>
+                            <select name="language" id="language" required>
+                                <option data-display="Select">Select an option</option>
+                                <option value="English">English</option>
+                                <option value="Bangla">Bangla</option>
+                            </select>
+                        </div> -->
+                        <div class="row mb-3 loadingIconWrapper">
+                            <img src="../assets/images/loading.gif" class="loadingIcon" alt="">
+                            <input type="submit" value="Subscribe" class="btnMain submitBtn">
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <p class="text-center fs-5 mb-0 p-2" id="subscriptionStatus">
+                        Status: <span>N/A</span>
+                    </p>
+                </div>
+                <div class="row mt-3" id="botSection">
+                    <p class="py-2" id="subscriptionText">
+                        Subcribed successfully.
+                    </p>
+                    <p id="botSectionHeader">
+                        Please verify your <span class="platformName"></span> ID by following steps.
+                    </p>
+                    <p>
+                        1. Find our <span class="platformName"></span> ID.
+                        <br>
+                        <span class="ps-3">Name: <span id="bot_name"></span></span>
+                        <br>
+                        <span class="ps-3">Username: <span id="bot_username"></span></span>
+                        <br>
+                        <span class="ps-3">Link: <span id="bot_link"></span></span>
+                    </p>
+                    <p>
+                        2. START chat (/start).
+                    </p>
+                    <p id="platformText">
+                        3. Send the following message from your <span class="platformName"></span> ID to our
+                        <span class="platformName"></span> Bot.
+                        <br>
+                        <span id="tokenSection">
+                            <span id="token">/token <span></span></span>
+                            <span id="copyBtn" data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-custom-class="custom-tooltip" data-bs-title="Copy Text">
+                                <svg width="14" height="14" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512">
+                                    <path
+                                        d="M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z" />
+                                </svg>
+                            </span>
+                        </span>
+                    </p>
+                </div>
+                <div class="toast toast-container position-fixed bottom-0 start-50 translate-middle-x mb-3" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="toast-body">
+                        Text copied to clipboard!
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mt-3 mt-sm-0">
+                <h4 class="mb-3">Frequently Asked Questions</h4>
+
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq1">
+                                What is Remind Name?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Remind Name is a service that helps you remember the 99 beautiful names of Allah
+                                (<span class="colorfullText">Al Asma ul Husna</span>) through regular notifications.
+                                <br><br>
+                                The service sends you one name at a time, including its Arabic form, English
+                                transliteration, and meaning.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq2">
+                                How do the notifications work?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You'll receive messages in this format:<br>
+                                <em>‎1. الرَّحْمَنُ ‎<br>
+                                    [ AR-RAHMAAN ]: ‎The Beneficent</em>
+                                Each notification contains one name, and they'll be sent sequentially through your
+                                chosen platform (e.g., Telegram).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq3">
+                                What is the default schedule?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                The default schedule sends notifications from 6:00 AM to 9:00 PM with a 3-hour interval.
+                                This means you'll receive notifications at 6 AM, 9 AM, 12 PM, 3 PM, 6 PM, and 9 PM.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq4">
+                                Can I customize my notification schedule?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes! Using the "Custom" schedule option, you can set your preferred:<br>
+                                - Start time (From)<br>
+                                - End time (To)<br>
+                                - Interval (minimum 3 hours between notifications)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq5">
+                                Which messaging platforms are supported?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Currently, we support Telegram. Support for other platforms (Discord, Messenger, Skype
+                                and WhatsApp) will be added in the future.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq6">
+                                How do I verify my platform ID?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                After subscribing, you'll receive instructions to:<br>
+                                1. Find our bot on your chosen platform<br>
+                                2. Start a chat with the bot (/start)<br>
+                                3. Send the verification token provided on screen<br><br>
+                                Once verified, you'll start receiving notifications according to your schedule.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq7">
+                                Why do I need to verify my platform ID?
+                            </button>
+                        </h2>
+                        <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Platform ID verification is essential to ensure that:
+                                <br>1. You are the actual owner of the account
+                                <br>2. The System has permission to send you messages
+                                <br>3. Your notifications are delivered to the correct account
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq8">
+                                How do I unsubscribe from the service?
+                            </button>
+                        </h2>
+                        <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                To unsubscribe, simply send the message <em>/unsubscribe</em> to our bot on your
+                                chosen platform. You'll stop receiving notifications immediately.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="py-3 mt-3">
+        <div class="row">
+            <div class="col">
+                <div>© 2025 Remind Name.</div>
+                <div>All rights reserved.</div>
+            </div>
+            <div class="col text-end">
+                <div>Any feedback is appreciated.</div>
+                <button class="btn btn-sm mb-2" id="feedbackBtn" data-bs-toggle="modal"
+                    data-bs-target="#feedbackModal">Give Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="feedbackModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="feedbackModalHeaderLabel"
+        aria-hidden="true" data-bs-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="feedbackForm" class="form mx-3">
+                    <div class="modal-header px-0">
+                        <p class="modal-title h5" id="feedbackModalHeaderLabel">Feedback</p>
+                        <span class="modal-close-icon" aria-hidden="true" data-bs-dismiss="modal"
+                            aria-label="Close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row pb-3">
+                            <label for="name" class="form-label mb-0">Your Name</label>
+                            <input type="text" class="inputField" id="name" name="name" placeholder="" required>
+                        </div>
+                        <div class="row pb-3">
+                            <label for="email" class="form-label mb-0">Your Email</label>
+                            <input type="email" class="inputField" id="email" name="email" placeholder="" required>
+                        </div>
+                        <div class="row">
+                            <label for="feedbackText" class="form-label mb-0">Your Feedback</label>
+                            <textarea class="inputField" id="feedbackText" name="feedbackText" rows="5" placeholder=""
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer px-5">
+                        <button type="button" class="btnMain btnCancel m-0" data-bs-dismiss="modal">Cancel</button>
+                        <span class="loadingIconWrapper m-0">
+                            <img src="../assets/images/loading.gif" class="loadingIcon" alt="">
+                            <input type="submit" value="Submit" class="btnMain submitBtn">
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/scripts/jquery-3.7.1.min.js?v={{ .VersionString }}"></script>
+    <script src="../assets/scripts/bootstrap.bundle.min.js?v={{ .VersionString }}"></script>
+    <script src="../assets/scripts/nice-select2.js?v={{ .VersionString }}"></script>
+    <script src="../assets/scripts/main.js?v={{ .VersionString }}"></script>
+</body>
+
+</html>

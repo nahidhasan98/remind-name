@@ -1,0 +1,23 @@
+package config
+
+var (
+	APP_MODE       = "development/production"
+	VERSION_STRING = "20241231"
+
+	APP_PORT    = 0000
+	API_VERSION = "v0"
+
+	DB_NAME              = "DatabaseName"
+	DB_CONNECTION_STRING = "DatabaseConnectionString"
+	SUB_COLLECTION       = "subCollectionName"
+
+	TELEGRAM_BOT_TOKEN 		  = "TelegramBotToken"
+	TELEGRAM_BOT_TOKEN_DEV    = "TelegramBotToken"
+	TELEGRAM_WEBHOOK_ENDPOINT = "https://mydomain.com/endpoint"
+
+	DISCORD_WEBHOOK_ID_FEEDBACK    = "FeedbackWebhookID"
+	DISCORD_WEBHOOK_TOKEN_FEEDBACK = "FeedbackWebhookToken"
+	
+	DISCORD_WEBHOOK_ID_SUBSCRIPTION    = "SubscriptionWebhookID"
+	DISCORD_WEBHOOK_TOKEN_SUBSCRIPTION = "SubscriptionWebhookToken"
+)

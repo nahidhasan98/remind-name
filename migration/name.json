@@ -1,0 +1,1289 @@
+[
+    {
+        "ID": 1,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّحْمَنُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RAHMAAN",
+                "Meaning": "The Beneficent"
+            }
+        }
+    },
+    {
+        "ID": 2,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّحِيمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RAHEEM",
+                "Meaning": "The Merciful"
+            }
+        }
+    },
+    {
+        "ID": 3,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمَلِكُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MALIK",
+                "Meaning": "The King"
+            }
+        }
+    },
+    {
+        "ID": 4,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقُدُّوسُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QUDDUS",
+                "Meaning": "The Most Sacred"
+            }
+        }
+    },
+    {
+        "ID": 5,
+        "Languages": {
+            "ar": {
+                "Transliteration": "السَّلاَمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AS-SALAM",
+                "Meaning": "The Source of Peace, The Flawless"
+            }
+        }
+    },
+    {
+        "ID": 6,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُؤْمِنُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MU’MIN",
+                "Meaning": "The Infuser of Faith"
+            }
+        }
+    },
+    {
+        "ID": 7,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُهَيْمِنُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUHAYMIN",
+                "Meaning": "The Preserver of Safety"
+            }
+        }
+    },
+    {
+        "ID": 8,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْعَزِيزُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-AZIZ",
+                "Meaning": "All Mighty"
+            }
+        }
+    },
+    {
+        "ID": 9,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْجَبَّارُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-JABBAR",
+                "Meaning": "The Compeller, The Restorer"
+            }
+        }
+    },
+    {
+        "ID": 10,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ُالْمُتَكَبِّر",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUTAKABBIR",
+                "Meaning": "The Supreme, The Majestic"
+            }
+        }
+    },
+    {
+        "ID": 11,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْخَالِقُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-KHAALIQ",
+                "Meaning": "The Creator, The Maker"
+            }
+        }
+    },
+    {
+        "ID": 12,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَارِئُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BAARI",
+                "Meaning": "The Evolver"
+            }
+        }
+    },
+    {
+        "ID": 13,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُصَوِّرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUSAWWIR",
+                "Meaning": "The Fashioner"
+            }
+        }
+    },
+    {
+        "ID": 14,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْغَفَّارُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-GHAFFAR",
+                "Meaning": "The Constant Forgiver"
+            }
+        }
+    },
+    {
+        "ID": 15,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقَهَّارُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QAHHAR",
+                "Meaning": "The All-Prevailing One"
+            }
+        }
+    },
+    {
+        "ID": 16,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَهَّابُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAHHAAB",
+                "Meaning": "The Supreme Bestower"
+            }
+        }
+    },
+    {
+        "ID": 17,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّزَّاقُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RAZZAAQ",
+                "Meaning": "The Provider"
+            }
+        }
+    },
+    {
+        "ID": 18,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْفَتَّاحُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-FATTAAH",
+                "Meaning": "The Supreme Solver"
+            }
+        }
+    },
+    {
+        "ID": 19,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اَلْعَلِيْمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-‘ALEEM",
+                "Meaning": "The All-Knowing"
+            }
+        }
+    },
+    {
+        "ID": 20,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقَابِضُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QAABID",
+                "Meaning": "The Withholder"
+            }
+        }
+    },
+    {
+        "ID": 21,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَاسِطُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BAASIT",
+                "Meaning": "The Extender"
+            }
+        }
+    },
+    {
+        "ID": 22,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْخَافِضُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-KHAAFIDH",
+                "Meaning": "The Reducer"
+            }
+        }
+    },
+    {
+        "ID": 23,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّافِعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RAAFI’",
+                "Meaning": "The Exalter, The Elevator"
+            }
+        }
+    },
+    {
+        "ID": 24,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُعِزُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MU’IZZ",
+                "Meaning": "The Honourer, The Bestower"
+            }
+        }
+    },
+    {
+        "ID": 25,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ٱلْمُذِلُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUZIL",
+                "Meaning": "The Dishonourer"
+            }
+        }
+    },
+    {
+        "ID": 26,
+        "Languages": {
+            "ar": {
+                "Transliteration": "السَّمِيعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AS-SAMEE’",
+                "Meaning": "The All-Hearing"
+            }
+        }
+    },
+    {
+        "ID": 27,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَصِيرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BASEER",
+                "Meaning": "The All-Seeing"
+            }
+        }
+    },
+    {
+        "ID": 28,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَكَمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAKAM",
+                "Meaning": "The Impartial Judge"
+            }
+        }
+    },
+    {
+        "ID": 29,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْعَدْلُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-‘ADL",
+                "Meaning": "The Utterly Just"
+            }
+        }
+    },
+    {
+        "ID": 30,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اللَّطِيفُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-LATEEF",
+                "Meaning": "The Subtle One, The Most Gentle"
+            }
+        }
+    },
+    {
+        "ID": 31,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْخَبِيرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-KHABEER",
+                "Meaning": "The All-Aware"
+            }
+        }
+    },
+    {
+        "ID": 32,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَلِيمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HALEEM",
+                "Meaning": "The Most Forbearing"
+            }
+        }
+    },
+    {
+        "ID": 33,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْعَظِيمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-‘AZEEM",
+                "Meaning": "The Magnificent, The Supreme"
+            }
+        }
+    },
+    {
+        "ID": 34,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْغَفُور",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-GHAFOOR",
+                "Meaning": "The Great Forgiver"
+            }
+        }
+    },
+    {
+        "ID": 35,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الشَّكُورُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "ASH-SHAKOOR",
+                "Meaning": "The Most Appreciative"
+            }
+        }
+    },
+    {
+        "ID": 36,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْعَلِيُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-‘ALEE",
+                "Meaning": "The Most High, The Exalted"
+            }
+        }
+    },
+    {
+        "ID": 37,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْكَبِيرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-KABEER",
+                "Meaning": "The Most Great"
+            }
+        }
+    },
+    {
+        "ID": 38,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَفِيظُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAFEEDH",
+                "Meaning": "The Preserver"
+            }
+        }
+    },
+    {
+        "ID": 39,
+        "Languages": {
+            "ar": {
+                "Transliteration": "المُقيِت",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUQEET",
+                "Meaning": "The Sustainer"
+            }
+        }
+    },
+    {
+        "ID": 40,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اﻟْﺣَسِيبُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HASEEB",
+                "Meaning": "The Reckoner"
+            }
+        }
+    },
+    {
+        "ID": 41,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْجَلِيلُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-JALEEL",
+                "Meaning": "The Majestic"
+            }
+        }
+    },
+    {
+        "ID": 42,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْكَرِيمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-KAREEM",
+                "Meaning": "The Most Generous, The Most Esteemed"
+            }
+        }
+    },
+    {
+        "ID": 43,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّقِيبُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RAQEEB",
+                "Meaning": "The Watchful"
+            }
+        }
+    },
+    {
+        "ID": 44,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ٱلْمُجِيبُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUJEEB",
+                "Meaning": "The Responsive One"
+            }
+        }
+    },
+    {
+        "ID": 45,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَاسِعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAASI’",
+                "Meaning": "The All-Encompassing, the Boundless"
+            }
+        }
+    },
+    {
+        "ID": 46,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَكِيمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAKEEM",
+                "Meaning": "The All-Wise"
+            }
+        }
+    },
+    {
+        "ID": 47,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَدُودُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WADUD",
+                "Meaning": "The Most Loving"
+            }
+        }
+    },
+    {
+        "ID": 48,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمَجِيدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MAJEED",
+                "Meaning": "The Glorious, The Most Honorable"
+            }
+        }
+    },
+    {
+        "ID": 49,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَاعِثُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BA’ITH",
+                "Meaning": "The Infuser of New Life"
+            }
+        }
+    },
+    {
+        "ID": 50,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الشَّهِيدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "ASH-SHAHEED",
+                "Meaning": "The All Observing Witnessing"
+            }
+        }
+    },
+    {
+        "ID": 51,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَقُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAQQ",
+                "Meaning": "The Absolute Truth"
+            }
+        }
+    },
+    {
+        "ID": 52,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَكِيلُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAKEEL",
+                "Meaning": "The Trustee, The Disposer of Affairs"
+            }
+        }
+    },
+    {
+        "ID": 53,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقَوِيُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QAWIYY",
+                "Meaning": "The All-Strong"
+            }
+        }
+    },
+    {
+        "ID": 54,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمَتِينُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MATEEN",
+                "Meaning": "The Firm, The Steadfast"
+            }
+        }
+    },
+    {
+        "ID": 55,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَلِيُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WALIYY",
+                "Meaning": "The Protecting Associate"
+            }
+        }
+    },
+    {
+        "ID": 56,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَمِيدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAMEED",
+                "Meaning": "The Praiseworthy"
+            }
+        }
+    },
+    {
+        "ID": 57,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُحْصِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUHSEE",
+                "Meaning": "The All-Enumerating, The Counter"
+            }
+        }
+    },
+    {
+        "ID": 58,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُبْدِئُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUBDI",
+                "Meaning": "The Originator, The Initiator"
+            }
+        }
+    },
+    {
+        "ID": 59,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ٱلْمُعِيدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUEED",
+                "Meaning": "The Restorer, The Reinstater"
+            }
+        }
+    },
+    {
+        "ID": 60,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُحْيِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUHYI",
+                "Meaning": "The Giver of Life"
+            }
+        }
+    },
+    {
+        "ID": 61,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اَلْمُمِيتُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUMEET",
+                "Meaning": "The Creator of Death"
+            }
+        }
+    },
+    {
+        "ID": 62,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْحَيُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAYY",
+                "Meaning": "The Ever-Living"
+            }
+        }
+    },
+    {
+        "ID": 63,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقَيُّومُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QAYYOOM",
+                "Meaning": "The Sustainer, The Self-Subsisting"
+            }
+        }
+    },
+    {
+        "ID": 64,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَاجِدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAAJID",
+                "Meaning": "The Perceiver"
+            }
+        }
+    },
+    {
+        "ID": 65,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمَاجِدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MAAJID",
+                "Meaning": "The Illustrious, the Magnificent"
+            }
+        }
+    },
+    {
+        "ID": 66,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْواحِدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAAHID",
+                "Meaning": "The One"
+            }
+        }
+    },
+    {
+        "ID": 67,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اَلاَحَدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-AHAD",
+                "Meaning": "The Unique, The Only One"
+            }
+        }
+    },
+    {
+        "ID": 68,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الصَّمَدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AS-SAMAD",
+                "Meaning": "The Eternal, Satisfier of Needs"
+            }
+        }
+    },
+    {
+        "ID": 69,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْقَادِرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-QADEER",
+                "Meaning": "The Omnipotent One"
+            }
+        }
+    },
+    {
+        "ID": 70,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُقْتَدِرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUQTADIR",
+                "Meaning": "The Powerful"
+            }
+        }
+    },
+    {
+        "ID": 71,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُقَدِّمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUQADDIM",
+                "Meaning": "The Expediter, The Promoter"
+            }
+        }
+    },
+    {
+        "ID": 72,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُؤَخِّرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MU’AKHKHIR",
+                "Meaning": "The Delayer"
+            }
+        }
+    },
+    {
+        "ID": 73,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الأوَّلُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-AWWAL",
+                "Meaning": "The First"
+            }
+        }
+    },
+    {
+        "ID": 74,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الآخِرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-AAKHIR",
+                "Meaning": "The Last"
+            }
+        }
+    },
+    {
+        "ID": 75,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الظَّاهِرُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AZ-ZAAHIR",
+                "Meaning": "The Manifest"
+            }
+        }
+    },
+    {
+        "ID": 76,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَاطِنُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BAATIN",
+                "Meaning": "The Hidden One, Knower of the Hidden"
+            }
+        }
+    },
+    {
+        "ID": 77,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَالِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAALI",
+                "Meaning": "The Sole Governor"
+            }
+        }
+    },
+    {
+        "ID": 78,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُتَعَالِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUTA’ALI",
+                "Meaning": "The Self Exalted"
+            }
+        }
+    },
+    {
+        "ID": 79,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَرُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BARR",
+                "Meaning": "The Source of All Goodness"
+            }
+        }
+    },
+    {
+        "ID": 80,
+        "Languages": {
+            "ar": {
+                "Transliteration": "التَّوَابُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AT-TAWWAB",
+                "Meaning": "The Ever-Pardoning"
+            }
+        }
+    },
+    {
+        "ID": 81,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُنْتَقِمُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUNTAQIM",
+                "Meaning": "The Avenger"
+            }
+        }
+    },
+    {
+        "ID": 82,
+        "Languages": {
+            "ar": {
+                "Transliteration": "العَفُوُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-‘AFUWW",
+                "Meaning": "The Pardoner"
+            }
+        }
+    },
+    {
+        "ID": 83,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّؤُوفُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RA’OOF",
+                "Meaning": "The Most Kind"
+            }
+        }
+    },
+    {
+        "ID": 84,
+        "Languages": {
+            "ar": {
+                "Transliteration": "َمَالِكُ ٱلْمُلْكُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "MAALIK-UL-MULK",
+                "Meaning": "Master of the Kingdom, Owner of the Dominion"
+            }
+        }
+    },
+    {
+        "ID": 85,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ذُوالْجَلاَلِ وَالإكْرَامِ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "DHUL-JALAALI WAL-IKRAAM",
+                "Meaning": "Lord of Glory and Honour, Lord of Majesty and Generosity"
+            }
+        }
+    },
+    {
+        "ID": 86,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْمُقْسِطُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUQSIT",
+                "Meaning": "The Just One"
+            }
+        }
+    },
+    {
+        "ID": 87,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْجَامِعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-JAAMI’",
+                "Meaning": "The Gatherer, the Uniter"
+            }
+        }
+    },
+    {
+        "ID": 88,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ٱلْغَنيُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-GHANIYY",
+                "Meaning": "The Self-Sufficient, The Wealthy"
+            }
+        }
+    },
+    {
+        "ID": 89,
+        "Languages": {
+            "ar": {
+                "Transliteration": "ٱلْمُغْنِيُّ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MUGHNI",
+                "Meaning": "The Enricher"
+            }
+        }
+    },
+    {
+        "ID": 90,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اَلْمَانِعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-MANI’",
+                "Meaning": "The Withholder"
+            }
+        }
+    },
+    {
+        "ID": 91,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الضَّارَ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AD-DHARR",
+                "Meaning": "The Distresser"
+            }
+        }
+    },
+    {
+        "ID": 92,
+        "Languages": {
+            "ar": {
+                "Transliteration": "النَّافِعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AN-NAFI’",
+                "Meaning": "The Propitious, the Benefactor"
+            }
+        }
+    },
+    {
+        "ID": 93,
+        "Languages": {
+            "ar": {
+                "Transliteration": "النُّورُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AN-NUR",
+                "Meaning": "The Light, The Illuminator"
+            }
+        }
+    },
+    {
+        "ID": 94,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْهَادِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-HAADI",
+                "Meaning": "The Guide"
+            }
+        }
+    },
+    {
+        "ID": 95,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْبَدِيعُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BADEE’",
+                "Meaning": "The Incomparable Originator"
+            }
+        }
+    },
+    {
+        "ID": 96,
+        "Languages": {
+            "ar": {
+                "Transliteration": "اَلْبَاقِي",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-BAAQI",
+                "Meaning": "The Everlasting"
+            }
+        }
+    },
+    {
+        "ID": 97,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الْوَارِثُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AL-WAARITH",
+                "Meaning": "The Inheritor, The Heir"
+            }
+        }
+    },
+    {
+        "ID": 98,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الرَّشِيدُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AR-RASHEED",
+                "Meaning": "The Guide, Infallible Teacher"
+            }
+        }
+    },
+    {
+        "ID": 99,
+        "Languages": {
+            "ar": {
+                "Transliteration": "الصَّبُورُ",
+                "Meaning": ""
+            },
+            "en": {
+                "Transliteration": "AS-SABOOR",
+                "Meaning": "The Forbearing, The Patient"
+            }
+        }
+    }
+]
