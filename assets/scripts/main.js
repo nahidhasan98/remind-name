@@ -88,7 +88,12 @@ function platformSelectEvent(instance) {
         instance.update();
         let value = $(event.target).val()
         let placeholder = "";
-        if (value == "Telegram") placeholder = "@RemindNameBot";
+        if (value == "Telegram") {
+            placeholder = "@RemindNameBot";
+            $("#usernameInfo").removeClass("d-none");
+        } else {
+            $("#usernameInfo").addClass("d-none");
+        }
 
         $("#usernameLabel").html("Your " + value + " Username/ID");
         $("#username").attr("placeholder", placeholder);
@@ -256,6 +261,17 @@ function formSubmitHandling() {
 $(document).ready(function () {
     let instance = NiceSelect.bind(document.getElementById("platform"));
     $('[data-bs-toggle="tooltip"]').tooltip()
+    $('[data-bs-toggle="popover"]').popover({
+        html: true,
+        trigger: 'click'
+    });
+
+    // Close popover when clicking outside
+    $('body').on('click', function (e) {
+        if (!$(e.target).closest('[data-bs-toggle="popover"]').length) {
+            $('[data-bs-toggle="popover"]').popover('hide');
+        }
+    });
 
     onClickEvent();
     onChangeEvent(instance);

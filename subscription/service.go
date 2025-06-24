@@ -86,15 +86,25 @@ func (service *SubscriptionService) AddSubscription(data *Subscription) (*Respon
 		return nil, errors.New("Something went wrong. Please try again.")
 	}
 
-	data.Token = token
-	data.Status = 0
 	now := time.Now().Unix()
-	data.UpdatedAt = now
-	data.CreatedAt = now
 
 	if sub != nil && sub.Status == 2 {
-		err = service.repo.updateSubscription(data)
+		sub.Token = token
+		sub.Status = 0
+		sub.ScheduleType = data.ScheduleType
+		sub.Timezone = data.Timezone
+		sub.TimeFrom = data.TimeFrom
+		sub.TimeTo = data.TimeTo
+		sub.TimeInterval = data.TimeInterval
+		sub.LastSentAt = 0
+		sub.LastSentID = 0
+		sub.UpdatedAt = now
+		err = service.repo.updateSubscription(sub)
 	} else {
+		data.Token = token
+		data.Status = 0
+		data.UpdatedAt = now
+		data.CreatedAt = now
 		err = service.repo.createSubscription(data)
 	}
 
@@ -104,14 +114,15 @@ func (service *SubscriptionService) AddSubscription(data *Subscription) (*Respon
 
 	return &Response{
 		Platform: platform,
-		Token:    data.Token,
-		Status:   data.Status,
+		Token:    token,
+		Status:   0,
 		Message:  "Subscribed successfully!",
 	}, nil
 }
 
 func (service *SubscriptionService) VerifySubscription(username, platform, token string, userID int64) error {
-	sub, err := service.repo.getSubscriptionByUsernameAndPlatform(username, platform)
+	sub, err := service.GetSubscription(username, platform, userID)
+	fmt.Println("sub", sub.Status)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return errors.New("You are not a subscriber. Please subscribe first from\nhttps://remind.name")
@@ -132,7 +143,11 @@ func (service *SubscriptionService) VerifySubscription(username, platform, token
 		return errors.New("Invalid token. Please try again.")
 	}
 
-	if err := service.repo.updateSubscriptionToVerified(username, platform, userID); err != nil {
+	if sub.Platform != "Telegram" {
+		sub.Username = fmt.Sprintf("%d", userID)
+	}
+
+	if err := service.repo.updateSubscriptionStatus(sub, 1); err != nil {
 		log.Printf("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
 		return errors.New("Something went wrong. Please try again.")
 	}
@@ -167,7 +182,7 @@ func (service *SubscriptionService) Unsubscribe(username, platform string) error
 		return errors.New("You are not a subscriber. Please subscribe first from\nhttps://remind.name")
 	}
 
-	if err := service.repo.updateSubscriptionToUnsubscribed(username, platform); err != nil {
+	if err := service.repo.updateSubscriptionStatus(sub, 2); err != nil {
 		log.Printf("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
 		return errors.New("Something went wrong. Please try again.")
 	}
@@ -188,8 +203,17 @@ func (service *SubscriptionService) Unsubscribe(username, platform string) error
 	return nil
 }
 
-func (service *SubscriptionService) GetSubscription(username, platform string) (*Subscription, error) {
-	sub, err := service.repo.getSubscriptionByUsernameAndPlatform(username, platform)
+func (service *SubscriptionService) GetSubscription(username, platform string, userID int64) (*Subscription, error) {
+	var sub *Subscription
+	var err error
+	user_idStr := fmt.Sprintf("%d", userID)
+
+	if platform == "Telegram" {
+		sub, err = service.repo.getSubscriptionForTelegram(username, user_idStr)
+	} else {
+		sub, err = service.repo.getSubscriptionByUsernameAndPlatform(username, platform)
+	}
+
 	if err != nil {
 		log.Printf("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
 		return nil, err

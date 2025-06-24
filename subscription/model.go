@@ -4,20 +4,20 @@ import "github.com/nahidhasan98/remind-name/platform"
 
 // Subscription represents a user's subscription to receive reminders.
 type Subscription struct {
-	Platform     string `bson:"platform" form:"platform" binding:"required"`
-	Username     string `bson:"username" form:"username" binding:"required"`
-	ScheduleType string `bson:"schedule_type" form:"scheduleType" binding:"required"`
-	Timezone     string `bson:"timezone" form:"timezone"`
-	TimeFrom     int    `bson:"time_from"`
-	TimeTo       int    `bson:"time_to"`
-	TimeInterval int    `bson:"time_interval"`
-	Status       int8   `bson:"status"` //  status: 0: not verified, 1: verified, 2: unsubscribed
-	LastSentAt   int64  `bson:"last_sent_at"`
-	LastSentID   int    `bson:"last_sent_id"`
-	UserID       int64  `bson:"user_id"` // User ID from the Telegram platform
-	Token        string `bson:"token"`
-	CreatedAt    int64  `bson:"created_at"`
-	UpdatedAt    int64  `bson:"updated_at"`
+	ID           interface{} `bson:"_id,omitempty"`
+	Platform     string      `bson:"platform" form:"platform" binding:"required"`
+	Username     string      `bson:"username" form:"username" binding:"required"`
+	ScheduleType string      `bson:"schedule_type" form:"scheduleType" binding:"required"`
+	Timezone     string      `bson:"timezone" form:"timezone"`
+	TimeFrom     int         `bson:"time_from"`
+	TimeTo       int         `bson:"time_to"`
+	TimeInterval int         `bson:"time_interval"`
+	Status       int8        `bson:"status"` //  status: 0: not verified, 1: verified, 2: unsubscribed
+	LastSentAt   int64       `bson:"last_sent_at"`
+	LastSentID   int         `bson:"last_sent_id"`
+	Token        string      `bson:"token"`
+	CreatedAt    int64       `bson:"created_at"`
+	UpdatedAt    int64       `bson:"updated_at"`
 
 	// Fields for form only (not stored in DB)
 	FromHour       string `bson:"-" form:"fromHour"`

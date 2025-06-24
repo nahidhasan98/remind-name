@@ -12,7 +12,7 @@ import (
 // Bot is implemented by each platform-specific bot.
 type Bot interface {
 	Start(ctx context.Context)
-	SendMessageToUser(userID int64, message string) error
+	SendMessageToUser(username, message string) error
 	GetPlatformName() string
 }
 
@@ -71,7 +71,7 @@ func (m *BotManager) SendMessage(sub *subscription.Subscription, message string)
 		return fmt.Errorf("platform %q is not supported", sub.Platform)
 	}
 
-	if err := bot.SendMessageToUser(sub.UserID, message); err != nil {
+	if err := bot.SendMessageToUser(sub.Username, message); err != nil {
 		return fmt.Errorf("error sending message via %s: %w", sub.Platform, err)
 	}
 	return nil

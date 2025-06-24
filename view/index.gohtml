@@ -47,7 +47,15 @@
                             </select>
                         </div>
                         <div class="row mb-3">
+                            <div class="d-flex align-items-center">
                             <label for="username" class="form-label mb-0" id="usernameLabel">Your Username or ID</label>
+                                <span id="usernameInfo" class="ms-2 d-none" data-bs-toggle="popover" data-bs-trigger="click" data-bs-placement="top" data-bs-custom-class="custom-popover" data-bs-content="If you're unsure about your Telegram username or ID, please check the FAQ section below.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </span>
+                            </div>
                             <input type="text" class="inputField" id="username" name="username" placeholder="" required>
                             <input type="hidden" name="timezone" id="timezone">
                         </div>
@@ -182,7 +190,7 @@
                 </div>
                 <div class="row">
                     <p class="text-center fs-5 mb-0 p-2" id="subscriptionStatus">
-                        Status: <span>N/A</span>
+                        Subscription Status: <span>N/A</span>
                     </p>
                 </div>
                 <div class="row mt-3" id="botSection">
@@ -354,10 +362,28 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#faq8">
-                                How do I unsubscribe from the service?
+                                How do I find my Telegram Username or ID?
                             </button>
                         </h2>
                         <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                To find your Telegram Username or ID, follow these simple steps:<br>
+                                1. Open Telegram and search for "<span class="colorfullText">@RemindNameBot</span>"<br>
+                                2. Start a chat with the bot by clicking "Start" or sending "<span class="colorfullText">/start</span>"<br>
+                                3. The bot will show your Username and ID<br><br>
+                                <em>Note: Use your Username or ID to subscribe to the service.</em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faq9">
+                                How do I unsubscribe from the service?
+                            </button>
+                        </h2>
+                        <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
                                 To unsubscribe, simply send the message <em>/unsubscribe</em> to our bot on your
                                 chosen platform. You'll stop receiving notifications immediately.

@@ -108,6 +108,10 @@ func (h *handler) AddSubscription(c *gin.Context) {
 		return
 	}
 
+	if sub.Username[0] == '@' {
+		sub.Username = sub.Username[1:]
+	}
+
 	sub.Timezone = validateTimezone(sub.Timezone)
 
 	// Validate platform and schedule values
