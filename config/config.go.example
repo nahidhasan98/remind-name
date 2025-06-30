@@ -20,4 +20,7 @@ var (
 	
 	DISCORD_WEBHOOK_ID_SUBSCRIPTION    = "SubscriptionWebhookID"
 	DISCORD_WEBHOOK_TOKEN_SUBSCRIPTION = "SubscriptionWebhookToken"
+
+	DEBUG_MODE = true/false
+	LOG_FILE   = "app.log"
 )
