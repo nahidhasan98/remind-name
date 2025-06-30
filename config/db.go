@@ -2,9 +2,9 @@ package config
 
 import (
 	"context"
-	"log"
 	"time"
 
+	"github.com/nahidhasan98/remind-name/logger"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -16,11 +16,11 @@ func DBConnect() (*mongo.Database, context.Context, context.CancelFunc) {
 
 	dbClient, err := mongo.Connect(ctx, options.Client().ApplyURI(DB_CONNECTION_STRING))
 	if err != nil {
-		log.Println("database initialization error:", err)
+		logger.Error("database initialization error: %v", err)
 	}
 
 	if err = dbClient.Ping(ctx, readpref.Primary()); err != nil {
-		log.Println("database initialization error:", err)
+		logger.Error("database initialization error: %v", err)
 	}
 
 	return dbClient.Database(DB_NAME), ctx, cancel
@@ -54,6 +54,6 @@ func init() {
 	defer DB.Client().Disconnect(ctx)
 
 	if err := createIndexes(DB, SUB_COLLECTION); err != nil {
-		log.Println("error creating indexes:", err)
+		logger.Error("error creating indexes: %v", err)
 	}
 }

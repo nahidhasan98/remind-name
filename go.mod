@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/nahidhasan98/discord-text-hook v0.0.0-20211013224151-54e8d7f3374a
 	go.mongodb.org/mongo-driver v1.17.3
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gopkg.in/telebot.v4 v4.0.0-beta.4
 )
 

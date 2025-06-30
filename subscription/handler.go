@@ -8,9 +8,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	discordtexthook "github.com/nahidhasan98/discord-text-hook"
-	"github.com/nahidhasan98/remind-name/config"
 	"github.com/nahidhasan98/remind-name/helper"
+	"github.com/nahidhasan98/remind-name/logger"
 )
 
 type handler struct {
@@ -171,18 +170,11 @@ func (h *handler) AddSubscription(c *gin.Context) {
 		return
 	}
 
-	// send to discord for instant notification
-	go func() {
-		disMsg := "```md\n"
-		disMsg += "# Subscribed\n"
-		disMsg += "Platform : " + sub.Platform + "\n"
-		disMsg += "Username : " + sub.Username + "\n"
-		disMsg += "Timezone : " + sub.Timezone + "\n"
-		disMsg += "```"
+	// Log the subscription
+	logger.Info("New subscription added: %s (%s) - %s", sub.Username, sub.Platform, sub.Timezone)
 
-		ds := discordtexthook.NewDiscordTextHookService(config.DISCORD_WEBHOOK_ID_SUBSCRIPTION, config.DISCORD_WEBHOOK_TOKEN_SUBSCRIPTION)
-		ds.SendMessage(disMsg)
-	}()
+	// Send Discord notification
+	helper.SendDiscordNotification("Subscribed", sub.Platform, sub.Username, sub.Timezone)
 
 	c.JSON(http.StatusOK, res)
 }

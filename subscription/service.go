@@ -5,10 +5,10 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/nahidhasan98/remind-name/helper"
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/platform"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -49,16 +49,16 @@ func generateToken(length int) (string, error) {
 func (service *SubscriptionService) AddSubscription(data *Subscription) (*Response, error) {
 	sub, err := service.repo.getSubscriptionByUsernameAndPlatform(data.Username, data.Platform)
 	if err != nil && !errors.Is(err, mongo.ErrNoDocuments) {
-		log.Printf("Error fetching subscription for username: %s, platform: %s, error: %v", data.Username, data.Platform, err)
+		logger.Error("Error fetching subscription for username: %s, platform: %s, error: %v", data.Username, data.Platform, err)
 		return nil, errors.New(helper.SomethingWentWrong)
 	}
 
 	platform, err := platformService.GetPlatformDetailsByName(data.Platform)
 	if err != nil {
-		log.Printf("Error fetching platform details for, platform: %s, error: %v", data.Platform, err)
+		logger.Error("Error fetching platform details for, platform: %s, error: %v", data.Platform, err)
 		return nil, errors.New(helper.SomethingWentWrong)
 	}
-	fmt.Println(sub)
+
 	// Handle existing subscription cases
 	if sub != nil {
 		if sub.Status == 1 {
@@ -81,7 +81,7 @@ func (service *SubscriptionService) AddSubscription(data *Subscription) (*Respon
 	// Handle new subscription or unsubscribed case
 	token, err := generateToken(16)
 	if err != nil {
-		log.Printf("Error generating token for username: %s, platform: %s, error: %v", data.Username, data.Platform, err)
+		logger.Error("Error generating token for username: %s, platform: %s, error: %v", data.Username, data.Platform, err)
 		return nil, errors.New(helper.SomethingWentWrong)
 	}
 
@@ -143,7 +143,7 @@ func (service *SubscriptionService) VerifySubscription(username, platform, token
 			if errors.Is(err, mongo.ErrNoDocuments) {
 				return helper.ErrNotSubscriber
 			}
-			log.Printf("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
+			logger.Error("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
 			return helper.ErrSomethingWentWrong
 		}
 
@@ -174,7 +174,7 @@ func (service *SubscriptionService) VerifySubscription(username, platform, token
 				if errors.Is(err, mongo.ErrNoDocuments) {
 					return helper.ErrNotSubscriber
 				}
-				log.Printf("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
+				logger.Error("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
 				return helper.ErrSomethingWentWrong
 			}
 			if err := validateSubscriptionStatus(sub, token); err != nil {
@@ -189,16 +189,16 @@ func (service *SubscriptionService) VerifySubscription(username, platform, token
 		}
 		err = service.repo.deleteUnverifiedSubscription(unverifiedSub)
 		if err != nil {
-			log.Printf("Error deleting unverified subscription for username: %s, platform: %s, error: %v", username, platform, err)
+			logger.Error("Error deleting unverified subscription for username: %s, platform: %s, error: %v", username, platform, err)
 			return helper.ErrSomethingWentWrong
 		}
 		// log deleteing info
-		log.Printf("Deleted unverified subscription for username: %s, platform: %s", unverifiedSub.Username, unverifiedSub.Platform)
+		logger.Info("Deleted unverified subscription for username: %s, platform: %s", unverifiedSub.Username, unverifiedSub.Platform)
 	}
 
 	// If found by user_idStr and all checks pass, update status and delete unverified subscription for username
 	if err := service.repo.updateSubscriptionStatus(sub, 1); err != nil {
-		log.Printf("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
+		logger.Error("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
 		return helper.ErrSomethingWentWrong
 	}
 
@@ -217,7 +217,7 @@ func (service *SubscriptionService) Unsubscribe(username, platform, user_idStr s
 			if errors.Is(err, mongo.ErrNoDocuments) {
 				return helper.ErrNotSubscriber
 			}
-			log.Printf("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
+			logger.Error("Error fetching subscription for username: %s, platform: %s, error: %v", username, platform, err)
 			return helper.ErrSomethingWentWrong
 		}
 
@@ -229,7 +229,7 @@ func (service *SubscriptionService) Unsubscribe(username, platform, user_idStr s
 		}
 		// Mark as unsubscribed
 		if err := service.repo.updateSubscriptionStatus(sub, 2); err != nil {
-			log.Printf("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
+			logger.Error("Error updating subscription status for username: %s, platform: %s, error: %v", username, platform, err)
 			return errors.New(helper.SomethingWentWrong)
 		}
 		// Send Discord notification
@@ -244,26 +244,26 @@ func (service *SubscriptionService) Unsubscribe(username, platform, user_idStr s
 	// If subByID is nil, check subByUser
 	if subByID == nil {
 		if subByUser != nil && subByUser.Status == 0 {
-			log.Printf("Unverified subscription for username: %s, platform: %s", username, platform)
+			logger.Warn("Unverified subscription for username: %s, platform: %s", username, platform)
 			return errors.New(helper.UnverifiedSubscriber)
 		}
-		log.Printf("No subscription found for username: %s, platform: %s", username, platform)
+		logger.Warn("No subscription found for username: %s, platform: %s", username, platform)
 		return helper.ErrNotSubscriber
 	}
 
 	// subByID is not nil
 	if subByID.Status == 0 {
-		log.Printf("Unverified subscription for user_idStr: %s, platform: %s", user_idStr, platform)
+		logger.Warn("Unverified subscription for user_idStr: %s, platform: %s", user_idStr, platform)
 		return errors.New(helper.UnverifiedSubscriber)
 	}
 	if subByID.Status == 2 {
-		log.Printf("Subscription already unsubscribed for user_idStr: %s, platform: %s", user_idStr, platform)
+		logger.Warn("Subscription already unsubscribed for user_idStr: %s, platform: %s", user_idStr, platform)
 		return errors.New(helper.NotSubscriber)
 	}
 
 	// subByID.Status == 1, proceed to unsubscribe
 	if err := service.repo.updateSubscriptionStatus(subByID, 2); err != nil {
-		log.Printf("Error updating subscription status for user_idStr: %s, platform: %s, error: %v", user_idStr, platform, err)
+		logger.Error("Error updating subscription status for user_idStr: %s, platform: %s, error: %v", user_idStr, platform, err)
 		return errors.New(helper.SomethingWentWrong)
 	}
 
@@ -272,10 +272,10 @@ func (service *SubscriptionService) Unsubscribe(username, platform, user_idStr s
 		toDelete := &Subscription{Username: username, Platform: "Telegram"}
 		err = service.repo.deleteUnverifiedSubscription(toDelete)
 		if err != nil && !errors.Is(err, mongo.ErrNoDocuments) {
-			log.Printf("Error deleting unverified subscription for username: %s, platform: %s, error: %v", username, platform, err)
+			logger.Error("Error deleting unverified subscription for username: %s, platform: %s, error: %v", username, platform, err)
 			return helper.ErrSomethingWentWrong
 		}
-		log.Printf("Deleted unverified subscription for username: %s, platform: %s", toDelete.Username, toDelete.Platform)
+		logger.Info("Deleted unverified subscription for username: %s, platform: %s", toDelete.Username, toDelete.Platform)
 	}
 
 	helper.SendDiscordNotification("Unsubscribed", subByID.Platform, subByID.Username, subByID.Timezone)
@@ -285,7 +285,7 @@ func (service *SubscriptionService) Unsubscribe(username, platform, user_idStr s
 func (service *SubscriptionService) GetSubscriptionsForDueNotification(currentUTCTime int64) ([]Subscription, error) {
 	subs, err := service.repo.getSubscriptionsForDueNotification(currentUTCTime)
 	if err != nil {
-		log.Printf("Error fetching subscriptions, error: %v", err)
+		logger.Error("Error fetching subscriptions, error: %v", err)
 		return nil, errors.New(helper.SomethingWentWrong)
 	}
 
@@ -294,7 +294,7 @@ func (service *SubscriptionService) GetSubscriptionsForDueNotification(currentUT
 
 func (service *SubscriptionService) UpdateLastSent(sub *Subscription, lastSentAt int64) error {
 	if err := service.repo.updateLastSent(sub, lastSentAt); err != nil {
-		log.Printf("Error updating last sent for username: %s, error: %v", sub.Username, err)
+		logger.Error("Error updating last sent for username: %s, error: %v", sub.Username, err)
 		return errors.New(helper.SomethingWentWrong)
 	}
 

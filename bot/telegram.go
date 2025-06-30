@@ -3,12 +3,12 @@ package bot
 import (
 	"context"
 	"fmt"
-	"log"
 	"strconv"
 	"time"
 
 	"github.com/nahidhasan98/remind-name/config"
 	"github.com/nahidhasan98/remind-name/helper"
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/subscription"
 	tele "gopkg.in/telebot.v4"
 )
@@ -73,7 +73,7 @@ func (t *TelegramBot) SendMessageToUser(username, message string) error {
 		return fmt.Errorf("failed to send message: %v", err)
 	}
 
-	log.Printf("Message sent to user %s: %s", recipient.Username, message)
+	logger.Info("Message sent to user %s: %s", recipient.Username, message)
 	return nil
 }
 
@@ -110,7 +110,7 @@ Let's get started!
 	bot.Handle("/token", func(c tele.Context) error {
 		args := c.Args()
 		if len(args) != 1 {
-			log.Printf("Invalid /token command by %s", c.Chat().Username)
+			logger.Warn("Invalid /token command by %s", c.Chat().Username)
 			return c.Send("Usage: /token <your-token>")
 		}
 
@@ -119,11 +119,11 @@ Let's get started!
 
 		err := subService.VerifySubscription(c.Chat().Username, t.Platform, token, user_idStr)
 		if err != nil {
-			log.Printf("Failed verification for %s: %v", c.Chat().Username, err)
+			logger.Error("Failed verification for %s: %v", c.Chat().Username, err)
 			return c.Send(helper.FormatErrorMessage(err.Error()))
 		}
 
-		log.Printf("User %s subscribed successfully.", c.Chat().Username)
+		logger.Info("User %s subscribed successfully.", c.Chat().Username)
 		return c.Send("You have successfully subscribed!")
 	})
 
@@ -135,7 +135,7 @@ Let's get started!
 			return c.Send(helper.FormatErrorMessage(err.Error()))
 		}
 
-		log.Printf("User %s unsubscribed successfully.", c.Chat().Username)
+		logger.Info("User %s unsubscribed successfully.", c.Chat().Username)
 		return c.Send("You have successfully unsubscribed.")
 	})
 
@@ -160,23 +160,23 @@ https://remind.name
 		return c.Send("Sorry, I didn't understand that command. Use /help to see the list of available commands.")
 	})
 
-	log.Println("RUNNING: Telegram Bot.")
+	logger.Info("RUNNING: Telegram Bot.")
 
 	// Run the bot in a goroutine to handle shutdown
 	go bot.Start()
 
 	// Wait for the context to be canceled
 	<-ctx.Done()
-	log.Println("Shutting down Telegram bot...")
+	logger.Info("Shutting down Telegram bot...")
 
 	// Remove the webhook
 	dropPendingUpdates := true
 	if err := bot.RemoveWebhook(dropPendingUpdates); err != nil {
-		log.Printf("Error removing webhook: %v", err)
+		logger.Error("Error removing webhook: %v", err)
 	}
-	log.Println("Webhook removed successfully.")
+	logger.Info("Webhook removed successfully.")
 
 	// Stop the bot gracefully
 	// bot.Stop()
-	log.Println("Telegram bot stopped.")
+	logger.Info("Telegram bot stopped.")
 }

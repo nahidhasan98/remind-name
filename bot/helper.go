@@ -2,16 +2,16 @@ package bot
 
 import (
 	"errors"
-	"log"
 
 	"github.com/nahidhasan98/remind-name/helper"
+	"github.com/nahidhasan98/remind-name/logger"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func checkStatusAndGetMessage(username string, platform, user_idStr string) string {
 	sub, err := subService.FindSubscription(username, platform, user_idStr)
 	if err != nil {
-		log.Printf("Error fetching subscription status: %v", err)
+		logger.Error("Error fetching subscription status: %v", err)
 		if errors.Is(err, mongo.ErrNoDocuments) || sub == nil {
 			return helper.NotSubscriber
 		}

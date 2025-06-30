@@ -2,12 +2,12 @@ package feedback
 
 import (
 	"html"
+	"log"
 	"net/http"
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	discordtexthook "github.com/nahidhasan98/discord-text-hook"
-	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/helper"
 )
 
 type handler struct {
@@ -45,17 +45,11 @@ func (h *handler) SaveFeedback(c *gin.Context) {
 		return
 	}
 
-	// send to discord for instant notification
-	go func() {
-		disMsg := "```md\n"
-		disMsg += "Name     : " + data.Name + "\n"
-		disMsg += "Email    : " + data.Email + "\n"
-		disMsg += "Feedback : " + data.Feedback + "\n"
-		disMsg += "```"
+	// Log the feedback
+	log.Printf("New feedback received from %s (%s): %s", data.Name, data.Email, data.Feedback)
 
-		ds := discordtexthook.NewDiscordTextHookService(config.DISCORD_WEBHOOK_ID_FEEDBACK, config.DISCORD_WEBHOOK_TOKEN_FEEDBACK)
-		ds.SendMessage(disMsg)
-	}()
+	// Send Discord notification
+	helper.SendDiscordNotification("Feedback", data.Name, data.Email, data.Feedback)
 
 	c.JSON(http.StatusOK, res)
 }

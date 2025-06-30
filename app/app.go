@@ -3,12 +3,12 @@ package app
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/logger"
 )
 
 type App struct {
@@ -35,16 +35,16 @@ func (as *App) Start(ctx context.Context) {
 
 	// Start the server in a goroutine
 	go func() {
-		log.Printf("RUNNING: Web server on port %d.", config.APP_PORT)
+		logger.Info("RUNNING: Web server on port %d.", config.APP_PORT)
 		if err := as.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("Web server failed: %v", err)
+			logger.Error("Web server failed: %v", err)
 		}
 	}()
 
 	// Wait for the context to be canceled
 	<-ctx.Done()
 
-	log.Println("Shutting down web server...")
+	logger.Info("Shutting down web server...")
 
 	// Create a shutdown context with a timeout
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -52,8 +52,8 @@ func (as *App) Start(ctx context.Context) {
 
 	// Gracefully shut down the server
 	if err := as.server.Shutdown(shutdownCtx); err != nil {
-		log.Fatalf("Web server shutdown failed: %v", err)
+		logger.Error("Web server shutdown failed: %v", err)
 	}
 
-	log.Println("Web server stopped.")
+	logger.Info("Web server stopped.")
 }

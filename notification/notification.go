@@ -3,11 +3,11 @@ package notification
 import (
 	"context"
 	"fmt"
-	"log"
 	"sync"
 	"time"
 
 	"github.com/nahidhasan98/remind-name/bot"
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/name"
 	"github.com/nahidhasan98/remind-name/subscription"
 )
@@ -33,7 +33,7 @@ func (ns *NotificationService) generateMessage(sub *subscription.Subscription) s
 	nextID := (sub.LastSentID % 99) + 1
 	name, err := ns.nameService.GetName(nextID)
 	if err != nil {
-		log.Printf("Error fetching name: %v", err)
+		logger.Error("Error fetching name: %v", err)
 		return ""
 	}
 
@@ -51,7 +51,7 @@ func (ns *NotificationService) generateMessage(sub *subscription.Subscription) s
 func (ns *NotificationService) sendNotification(sub *subscription.Subscription) {
 	message := ns.generateMessage(sub)
 	if err := ns.botManager.SendMessage(sub, message); err != nil {
-		log.Printf("Failed to send notification: %v", err)
+		logger.Error("Failed to send notification: %v", err)
 	}
 }
 
@@ -65,7 +65,7 @@ func (ns *NotificationService) checkAndSendNotifications() {
 	subcriptionService := subscription.NewSubscriptionService()
 	subs, err := subcriptionService.GetSubscriptionsForDueNotification(currentUTCTime)
 	if err != nil {
-		log.Println("Error fetching users:", err)
+		logger.Error("Error fetching users: %v", err)
 		return
 	}
 
@@ -81,7 +81,7 @@ func (ns *NotificationService) checkAndSendNotifications() {
 			for sub := range jobChan {
 				loc, err := time.LoadLocation(sub.Timezone)
 				if err != nil {
-					log.Println("Invalid timezone:", sub.Timezone, err)
+					logger.Error("Invalid timezone: %v %v", sub.Timezone, err)
 					wg.Done()
 					continue
 				}
@@ -92,7 +92,7 @@ func (ns *NotificationService) checkAndSendNotifications() {
 				if currentTimeInSeconds >= sub.TimeFrom && currentTimeInSeconds <= sub.TimeTo {
 					ns.sendNotification(&sub)
 					ns.subscriptionService.UpdateLastSent(&sub, currentUTCTime)
-					log.Printf("Worker %d sent notification to %s", workerID, sub.Username)
+					logger.Info("Worker %d sent notification to %s", workerID, sub.Username)
 				}
 				wg.Done()
 			}
@@ -115,7 +115,7 @@ func (ns *NotificationService) StartScheduler(ctx context.Context) {
 	ticker := time.NewTicker(1 * time.Minute)
 	defer ticker.Stop()
 
-	log.Println("RUNNING: Notification scheduler.")
+	logger.Info("RUNNING: Notification scheduler.")
 
 	// Run immediately on startup
 	ns.checkAndSendNotifications()
@@ -125,7 +125,7 @@ func (ns *NotificationService) StartScheduler(ctx context.Context) {
 		case <-ticker.C:
 			ns.checkAndSendNotifications()
 		case <-ctx.Done():
-			log.Println("Shutting down Notification scheduler...")
+			logger.Info("Shutting down Notification scheduler...")
 			return
 		}
 	}

@@ -7,6 +7,5 @@ main.exe
 remind-name
 remind-name.exe
 
-# resources
-ngrok
-ngrok.exe
+# logs
+logs/*.log

@@ -2,6 +2,8 @@ package migration
 
 import (
 	"fmt"
+
+	"github.com/nahidhasan98/remind-name/logger"
 )
 
 // Command interface for different migration commands
@@ -30,11 +32,12 @@ func (r *Runner) AddCommand(cmd Command) {
 // Run executes all migration commands
 func (r *Runner) Run() error {
 	for _, cmd := range r.commands {
-		fmt.Printf("Running migration: %s\n", cmd.Name())
+		logger.Info("Running migration: %s", cmd.Name())
 		if err := cmd.Execute(); err != nil {
+			logger.Error("Migration %s failed: %v", cmd.Name(), err)
 			return fmt.Errorf("migration %s failed: %v", cmd.Name(), err)
 		}
-		fmt.Printf("Completed migration: %s\n", cmd.Name())
+		logger.Info("Completed migration: %s", cmd.Name())
 	}
 	return nil
 }

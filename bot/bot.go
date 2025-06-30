@@ -3,9 +3,9 @@ package bot
 import (
 	"context"
 	"fmt"
-	"log"
 	"sync"
 
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/subscription"
 )
 
@@ -35,7 +35,7 @@ func GetBotManager() *BotManager {
 		// Example: initialize Telegram bot once.
 		telegramBot, err := NewTelegramBot()
 		if err != nil {
-			log.Printf("Error initializing Telegram bot: %v", err)
+			logger.Error("Error initializing Telegram bot: %v", err)
 		} else {
 			bots["Telegram"] = telegramBot
 		}

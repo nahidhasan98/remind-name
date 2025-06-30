@@ -2,8 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"sync"
@@ -11,8 +9,20 @@ import (
 
 	myApp "github.com/nahidhasan98/remind-name/app"
 	"github.com/nahidhasan98/remind-name/bot"
+	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/notification"
 )
+
+// Initialize the logger
+func initializeLogger() {
+	logger.Init(config.DEBUG_MODE, config.LOG_FILE)
+	defer func() {
+		if !config.DEBUG_MODE {
+			logger.Info("Logger closed.")
+		}
+	}()
+}
 
 // Initialize all bots
 func initializeBots(ctx context.Context, wg *sync.WaitGroup) {
@@ -56,18 +66,20 @@ func waitForShutdown(cancel context.CancelFunc, wg *sync.WaitGroup) {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt, syscall.SIGTERM)
 	<-sigChan
-	log.Println("Shutting down gracefully...")
+	logger.Info("Shutting down gracefully...")
 
 	// Cancel the context to signal goroutines to stop
 	cancel()
 
 	// Wait for all goroutines to finish
 	wg.Wait()
-	log.Println("Application stopped.")
+	logger.Info("Application stopped.")
 }
 
 func main() {
-	fmt.Println("program is running...")
+	// Initialize logger
+	initializeLogger()
+	logger.Info("Starting Remind Name application...")
 
 	// Create a context for graceful shutdown
 	ctx, cancel := context.WithCancel(context.Background())

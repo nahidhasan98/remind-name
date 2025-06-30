@@ -1,13 +1,18 @@
 package main
 
 import (
-	"log"
+	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/logger"
+
+	"os"
 
 	"github.com/nahidhasan98/remind-name/migration"
 	"github.com/nahidhasan98/remind-name/migration/commands"
 )
 
 func main() {
+	logger.Init(config.DEBUG_MODE, "logs/app.log")
+
 	// Create a new migration runner
 	runner := migration.NewRunner()
 
@@ -17,6 +22,7 @@ func main() {
 
 	// Run all migrations
 	if err := runner.Run(); err != nil {
-		log.Fatal("Migration failed:", err)
+		logger.Error("Migration failed: %v", err)
+		os.Exit(1)
 	}
 }

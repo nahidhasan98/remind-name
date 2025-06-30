@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/name"
 	"github.com/nahidhasan98/remind-name/platform"
 	"go.mongodb.org/mongo-driver/bson"
@@ -35,17 +36,19 @@ func MigrateJSONToMongo(collectionName string, jsonFileName string) error {
 	collection := DB.Collection(collectionName)
 	count, err := collection.CountDocuments(ctx, bson.M{})
 	if err != nil {
+		logger.Error("Error checking %s: %v", collectionName, err)
 		return fmt.Errorf("error checking %s: %v", collectionName, err)
 	}
 
 	if count > 0 {
-		fmt.Printf("%s data already exists in database\n", collectionName)
+		logger.Info("%s data already exists in database", collectionName)
 		return nil
 	}
 
 	// Load data from JSON file
 	jsonFile, err := os.Open(jsonFileName)
 	if err != nil {
+		logger.Error("Error opening %s: %v", jsonFileName, err)
 		return fmt.Errorf("error opening %s: %v", jsonFileName, err)
 	}
 	defer jsonFile.Close()
@@ -63,15 +66,17 @@ func MigrateJSONToMongo(collectionName string, jsonFileName string) error {
 	}
 
 	if err != nil {
+		logger.Error("Error decoding %s: %v", jsonFileName, err)
 		return fmt.Errorf("error decoding %s: %v", jsonFileName, err)
 	}
 
 	// Insert data into MongoDB
 	_, err = collection.InsertMany(ctx, documents)
 	if err != nil {
+		logger.Error("Error inserting %s: %v", collectionName, err)
 		return fmt.Errorf("error inserting %s: %v", collectionName, err)
 	}
 
-	fmt.Printf("Successfully migrated %s data to database\n", collectionName)
+	logger.Info("Successfully migrated %s data to database", collectionName)
 	return nil
 }
