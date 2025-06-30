@@ -317,6 +317,18 @@ a:hover {
     --bs-tooltip-border-radius: 3px;
 }
 
+.custom-popover {
+    --bs-popover-bg: #284671;
+    --bs-popover-body-color: #fff;
+    --bs-popover-border-radius: 3px;
+    opacity: 0.9;
+}
+
+.popover-body {
+    padding: 8px;
+    text-align: center;
+}
+
 .toast {
     width: auto;
     color: #fff;

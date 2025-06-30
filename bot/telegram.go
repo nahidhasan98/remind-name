@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/helper"
 	"github.com/nahidhasan98/remind-name/subscription"
 	tele "gopkg.in/telebot.v4"
 )
@@ -54,36 +56,19 @@ func NewTelegramBot() (*TelegramBot, error) {
 	}, nil
 }
 
-func checkStatusAndGetMessage(username, platform string) string {
-	sub, err := subService.GetSubscription(username, platform)
-	if err != nil {
-		log.Printf("Error fetching subscription status: %v", err)
-	}
-
-	msg := ""
-
-	if sub != nil && sub.Status == 1 { // already verified subscription
-		msg = `
-Your subscription already verified.
-
-Here is your available options:
-- Unsubscribe: Use /unsubscribe to stop receiving reminders.
-- Help: Use /help to see all available commands.
-`
-	}
-
-	return msg
-}
-
 func (t *TelegramBot) GetPlatformName() string {
 	return t.Platform
 }
 
 // SendMessageToUser sends a message to a specific user
-func (t *TelegramBot) SendMessageToUser(userID int64, message string) error {
-	recipient := &tele.User{ID: userID}
+func (t *TelegramBot) SendMessageToUser(username, message string) error {
+	user_idStr, err := strconv.ParseInt(username, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid username: %v", err)
+	}
+	recipient := &tele.User{ID: user_idStr}
 
-	_, err := t.Bot.Send(recipient, message)
+	_, err = t.Bot.Send(recipient, message)
 	if err != nil {
 		return fmt.Errorf("failed to send message: %v", err)
 	}
@@ -97,32 +82,32 @@ func (t *TelegramBot) Start(ctx context.Context) {
 
 	// Handle /start command
 	bot.Handle("/start", func(c tele.Context) error {
-		msg := checkStatusAndGetMessage(c.Chat().Username, t.Platform)
-		if msg != "" {
+		user_idStr := fmt.Sprintf("%d", c.Chat().ID)
+
+		msg := checkStatusAndGetMessage(c.Chat().Username, t.Platform, user_idStr)
+		if msg != "" && msg != helper.NotSubscriber {
 			return c.Send(msg)
 		}
 
-		welcomeMessage := `
-Welcome to Remind Name Bot!
+		welcomeMessage := fmt.Sprintf(`
+Assalamu alaikum %s
+Your Username: %s
+Your User ID: %d
 
-I can help you verify subscription and receive reminders.
+Welcome to Remind Name Bot! I can help you to verify your subscription and receive notifications.
+
 Here's what you can do:
-- Verify Subscription: Use /token <your-token> to verify your subscription.
-- Unsubscribe: Use /unsubscribe to stop receiving reminders.
+- Verify Subscription: (After subscribing from website) Use /token <your-token> to verify your subscription.
+- Unsubscribe: Use /unsubscribe to stop receiving notifications.
 - Help: Use /help to see all available commands.
 
 Let's get started!
-`
+`, c.Chat().FirstName, c.Chat().Username, c.Chat().ID)
 		return c.Send(welcomeMessage)
 	})
 
 	// Handle /token command
 	bot.Handle("/token", func(c tele.Context) error {
-		msg := checkStatusAndGetMessage(c.Chat().Username, t.Platform)
-		if msg != "" {
-			return c.Send(msg)
-		}
-
 		args := c.Args()
 		if len(args) != 1 {
 			log.Printf("Invalid /token command by %s", c.Chat().Username)
@@ -130,11 +115,12 @@ Let's get started!
 		}
 
 		token := args[0]
+		user_idStr := fmt.Sprintf("%d", c.Chat().ID)
 
-		err := subService.VerifySubscription(c.Chat().Username, t.Platform, token, c.Chat().ID)
+		err := subService.VerifySubscription(c.Chat().Username, t.Platform, token, user_idStr)
 		if err != nil {
 			log.Printf("Failed verification for %s: %v", c.Chat().Username, err)
-			return c.Send(err.Error())
+			return c.Send(helper.FormatErrorMessage(err.Error()))
 		}
 
 		log.Printf("User %s subscribed successfully.", c.Chat().Username)
@@ -143,9 +129,10 @@ Let's get started!
 
 	// Handle /unsubscribe command
 	bot.Handle("/unsubscribe", func(c tele.Context) error {
-		err := subService.Unsubscribe(c.Chat().Username, t.Platform)
+		id_str := fmt.Sprintf("%d", c.Chat().ID)
+		err := subService.Unsubscribe(c.Chat().Username, t.Platform, id_str)
 		if err != nil {
-			return c.Send(err.Error())
+			return c.Send(helper.FormatErrorMessage(err.Error()))
 		}
 
 		log.Printf("User %s unsubscribed successfully.", c.Chat().Username)
@@ -159,10 +146,11 @@ Available Commands:
 
 /start - Welcome message and instructions.
 /token <your-token> - Verify your subscription.
-/unsubscribe - Stop receiving reminders.
+/unsubscribe - Stop receiving notifications.
 /help - Show this help message.
 
 If you have any questions, feel free to reach out!
+https://remind.name
 `
 		return c.Send(helpMessage)
 	})

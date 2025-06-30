@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	discordtexthook "github.com/nahidhasan98/discord-text-hook"
 	"github.com/nahidhasan98/remind-name/config"
+	"github.com/nahidhasan98/remind-name/helper"
 )
 
 type handler struct {
@@ -81,7 +82,7 @@ func (h *handler) AddSubscription(c *gin.Context) {
 	var sub Subscription
 
 	if err := c.ShouldBind(&sub); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(err.Error())})
 		return
 	}
 
@@ -104,21 +105,25 @@ func (h *handler) AddSubscription(c *gin.Context) {
 
 	// Validate data
 	if sub.Username == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Username is required"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.UsernameRequired)})
 		return
+	}
+
+	if sub.Username[0] == '@' {
+		sub.Username = sub.Username[1:]
 	}
 
 	sub.Timezone = validateTimezone(sub.Timezone)
 
 	// Validate platform and schedule values
 	if !isValidPlatform(sub.Platform) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid platform"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidPlatform)})
 		return
 	}
 
 	// Validate schedule
 	if sub.ScheduleType != "default" && sub.ScheduleType != "custom" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid schedule type"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidScheduleType)})
 		return
 	}
 
@@ -127,21 +132,21 @@ func (h *handler) AddSubscription(c *gin.Context) {
 		sub.TimeTo = 21 * 60 * 60      // 9:00 PM
 		sub.TimeInterval = 3 * 60 * 60 // 3:00 Hour
 	} else {
-		valid, fromSeconds := isValidTime(sub.FromHour, sub.FromMinute, sub.FromAMPM)
-		if !valid {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid 'from' time"})
+		okFrom, fromSeconds := isValidTime(sub.FromHour, sub.FromMinute, sub.FromAMPM)
+		if !okFrom {
+			c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidFromTime)})
 			return
 		}
 
-		valid, toSeconds := isValidTime(sub.ToHour, sub.ToMinute, sub.ToAMPM)
-		if !valid {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid 'to' time"})
+		okTo, toSeconds := isValidTime(sub.ToHour, sub.ToMinute, sub.ToAMPM)
+		if !okTo {
+			c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidToTime)})
 			return
 		}
 
-		valid, intervalSeconds := isValidTime(sub.IntervalHour, sub.IntervalMinute, "ignore")
-		if !valid {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid 'interval' time"})
+		okInterval, intervalSeconds := isValidTime(sub.IntervalHour, sub.IntervalMinute, "ignore")
+		if !okInterval {
+			c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidIntervalTime)})
 			return
 		}
 
@@ -150,19 +155,19 @@ func (h *handler) AddSubscription(c *gin.Context) {
 		sub.TimeInterval = intervalSeconds
 
 		if sub.TimeFrom > sub.TimeTo {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid timing.<br>'From' time should be less than or equal to 'To' time."})
+			c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidTimingFromTo)})
 			return
 		}
 
 		if sub.TimeInterval < 30*60 {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid timing.<br>'Interval' should be at least 30 minutes."})
+			c.JSON(http.StatusBadRequest, gin.H{"error": helper.FormatErrorMessage(helper.InvalidTimingInterval)})
 			return
 		}
 	}
 
 	res, err := h.service.AddSubscription(&sub)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": helper.FormatErrorMessage(err.Error())})
 		return
 	}
 
