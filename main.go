@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"os"
 	"os/signal"
 	"sync"
@@ -13,6 +14,12 @@ import (
 	"github.com/nahidhasan98/remind-name/logger"
 	"github.com/nahidhasan98/remind-name/notification"
 )
+
+//go:embed all:assets
+var AssetsFS embed.FS
+
+//go:embed all:view
+var ViewsFS embed.FS
 
 // Initialize the logger
 func initializeLogger() {
@@ -37,7 +44,7 @@ func initializeBots(ctx context.Context, wg *sync.WaitGroup) {
 
 // Start the web server
 func startWebServer(ctx context.Context, wg *sync.WaitGroup) *myApp.App {
-	app := myApp.New()
+	app := myApp.New(AssetsFS, ViewsFS)
 	app.RegisterRoute()
 
 	wg.Add(1)

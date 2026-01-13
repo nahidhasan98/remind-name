@@ -62,8 +62,7 @@ func (ns *NotificationService) checkAndSendNotifications() {
 	// time range and time zone are handled in this function
 	currentUTCTime := time.Now().UTC().Unix()
 
-	subcriptionService := subscription.NewSubscriptionService()
-	subs, err := subcriptionService.GetSubscriptionsForDueNotification(currentUTCTime)
+	subs, err := ns.subscriptionService.GetSubscriptionsForDueNotification(currentUTCTime)
 	if err != nil {
 		logger.Error("Error fetching users: %v", err)
 		return

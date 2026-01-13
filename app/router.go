@@ -1,6 +1,10 @@
 package app
 
 import (
+	"html/template"
+	"io/fs"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/nahidhasan98/remind-name/bot"
 	"github.com/nahidhasan98/remind-name/feedback"
@@ -9,8 +13,13 @@ import (
 )
 
 func (app *App) RegisterRoute() {
-	app.LoadHTMLGlob("view/*")
-	app.Static("/assets", "./assets")
+	// Load embedded HTML templates
+	templ := template.Must(template.New("").ParseFS(app.ViewsFS, "view/*"))
+	app.SetHTMLTemplate(templ)
+
+	// Serve embedded static assets
+	assetsSubFS, _ := fs.Sub(app.AssetsFS, "assets")
+	app.StaticFS("/assets", http.FS(assetsSubFS))
 
 	app.GET("/", web.Index)
 

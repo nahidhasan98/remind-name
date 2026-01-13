@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"embed"
 	"fmt"
 	"net/http"
 	"time"
@@ -13,16 +14,20 @@ import (
 
 type App struct {
 	*gin.Engine
-	server *http.Server // to support graceful shutdown
+	server   *http.Server // to support graceful shutdown
+	AssetsFS embed.FS
+	ViewsFS  embed.FS
 }
 
-func New() *App {
+func New(assetsFS, viewsFS embed.FS) *App {
 	if config.APP_MODE == "production" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	return &App{
-		Engine: gin.Default(),
+		Engine:   gin.Default(),
+		AssetsFS: assetsFS,
+		ViewsFS:  viewsFS,
 	}
 }
 

@@ -6,6 +6,7 @@ main
 main.exe
 remind-name
 remind-name.exe
+bin/remind
 
 # logs
 logs/*.log
